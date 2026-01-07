@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Gesture Runner</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<!-- ================= HOME SCREEN ================= -->
+<div id="homeScreen" class="screen active">
+  <div class="homeCard">
+    <div class="hero">
+      <div class="heroLeft">
+        <h1>Gesture Runner</h1>
+        <p class="subtitle">
+          A gesture-controlled runner game using AI hand tracking directly in the browser.
+        </p>
+
+        <h3>How to Play</h3>
+        <ul class="instructions">
+          <li>✋ <b>5 fingers</b> → RUN / Start</li>
+          <li>✌️ <b>2 fingers</b> → JUMP</li>
+          <li>☝️ <b>1 finger</b> → DUCK</li>
+          <li>🤟 <b>3 fingers</b> → MOVE LEFT</li>
+          <li>🖖 <b>4 fingers</b> → MOVE RIGHT</li>
+          <li>🙈 <b>No hand</b> → PAUSE</li>
+        </ul>
+
+        <div class="homeBtns">
+          <button id="startBtn" class="btnPrimary">Start Game</button>
+          <button id="aboutBtn" class="btnGhost">About</button>
+        </div>
+
+        <p class="note">Please allow camera access when prompted.</p>
+      </div>
+
+      <!-- 3D-ish animation -->
+      <div class="heroRight">
+        <div class="stage">
+          <div class="runner3d" aria-hidden="true">
+            <div class="runnerBody"></div>
+            <div class="runnerHead"></div>
+            <div class="runnerArm runnerArmL"></div>
+            <div class="runnerArm runnerArmR"></div>
+            <div class="runnerLeg runnerLegL"></div>
+            <div class="runnerLeg runnerLegR"></div>
+            <div class="shadow"></div>
+          </div>
+          <div class="orbitGlow"></div>
+        </div>
+        <div class="animLabel">Live 3D play</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= ABOUT SCREEN ================= -->
+<div id="aboutScreen" class="screen">
+  <div class="homeCard">
+    <div class="topBar">
+      <button id="aboutBackBtn" class="btnGhost">← Back</button>
+    </div>
+
+    <div class="aboutGrid">
+      <div>
+        <h1>About</h1>
+        <p class="subtitle">
+          Gesture Runner is a browser-based game controlled using real-time hand tracking.
+          It uses MediaPipe Hands to detect landmarks, then maps stable finger counts to game actions.
+        </p>
+
+        <div class="aboutBox">
+          <h3>What it demonstrates</h3>
+          <ul class="instructions">
+            <li>Real-time computer vision (hand landmarks)</li>
+            <li>Gesture recognition with stability filtering</li>
+            <li>Interactive gameplay + UI/UX design</li>
+            <li>Front-end engineering in the browser</li>
+          </ul>
+        </div>
+
+        <div class="aboutBox">
+          <h3>Tech used</h3>
+          <ul class="instructions">
+            <li>HTML + CSS + JavaScript</li>
+            <li>MediaPipe Hands</li>
+            <li>Canvas rendering</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- About animation -->
+      <div class="aboutAnimWrap">
+        <div class="stage stageSmall">
+          <div class="cubeScene" aria-hidden="true">
+            <div class="cube">
+              <div class="face f1"></div>
+              <div class="face f2"></div>
+              <div class="face f3"></div>
+              <div class="face f4"></div>
+              <div class="face f5"></div>
+              <div class="face f6"></div>
+            </div>
+            <div class="scanRing"></div>
+          </div>
+        </div>
+        <div class="animLabel"></div>
+      </div>
+    </div>
+
+    <div class="homeBtns" style="justify-content:center; margin-top: 18px;">
+      <button id="aboutStartBtn" class="btnPrimary">Start Game</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= GAME SCREEN ================= -->
+<div id="gameScreen" class="screen">
+  <div class="gameTop">
+    <div>
+      <h1 style="margin:0;">Gesture Runner</h1>
+      <div class="smallText">Use hand gestures to control the runner</div>
+    </div>
+
+    <div class="gameTopBtns">
+      <button id="toHomeBtn" class="btnGhost">Home</button>
+      <button id="toAboutBtn" class="btnGhost">About</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="card">
+      <h2>Camera</h2>
+      <div class="camWrap">
+        <video id="video" autoplay playsinline width="640" height="480"></video>
+        <canvas id="overlay" width="640" height="480"></canvas>
+      </div>
+      <p class="hint">
+        5 = RUN • 2 = JUMP • 1 = DUCK • 3 = LEFT • 4 = RIGHT • No hand = PAUSE
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Game</h2>
+      <canvas id="gameCanvas" width="900" height="400"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- ================= LIBRARIES ================= -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js"></script>
+
+<!-- ================= YOUR SCRIPTS ================= -->
+<script src="js/handTracking.js"></script>
+<script src="js/gestures.js"></script>
+<script src="js/game.js"></script>
+<script src="js/ui.js"></script>
+
+</body>
+</html>
